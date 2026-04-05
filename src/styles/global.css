@@ -1,84 +1,301 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cyberpunk theme base styles */
 html {
-  background-color: #f1f5f9;
-  font-family: sans-serif;
+  background-color: #000000;
+  color: #e0e0e0;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  line-height: 1.6;
 }
 
 body {
   margin: 0 auto;
   width: 100%;
   max-width: 80ch;
-  padding: 1rem;
-  line-height: 1.5;
+  padding: 2rem 1rem;
+  background-color: #000000;
+  position: relative;
+}
+
+/* CRT Scanline Effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
 }
 
 * {
   box-sizing: border-box;
 }
 
+/* Typography */
 h1 {
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   font-size: 2.5rem;
+  color: #00ffff;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  border-bottom: 2px solid #00ffff;
+  padding-bottom: 0.5rem;
 }
 
-footer {
+h2 {
+  margin: 1.25rem 0;
+  font-size: 1.875rem;
+  color: #39ff14;
+  font-weight: bold;
+}
+
+h3 {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  color: #00ffff;
+}
+
+h4, h5, h6 {
+  color: #e0e0e0;
+  margin: 0.75rem 0;
+}
+
+p {
+  color: #e0e0e0;
+  margin: 1rem 0;
+}
+
+a {
+  color: #39ff14;
+  text-decoration: none;
+  border-bottom: 1px dashed #39ff14;
+  transition: all 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: #00ffff;
+  border-bottom: 1px solid #00ffff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+/* Code blocks */
+code {
+  background-color: rgba(0, 255, 255, 0.05);
+  color: #39ff14;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background-color: #0a0e27;
+  border: 1px solid #00ffff;
+  border-radius: 4px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+pre code {
+  background-color: transparent;
+  color: #39ff14;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Navigation */
+nav {
   display: flex;
-  gap: 1.5rem; 
-  justify-content: center;
-  padding: 2rem;
-  background-color: #4c1d95;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #00ffff;
+  padding-bottom: 1rem;
 }
 
-/* nav styles */
+/* Mobile menu button */
 .menu {
-  background-color: #0d0950;
-  border: none;
-  color: #fff;
+  background-color: transparent;
+  border: 1px solid #00ffff;
+  color: #00ffff;
   font-size: 1.2rem;
   font-weight: bold;
-  padding: 5px 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s ease;
 }
 
+.menu:hover,
+.menu:focus {
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Navigation links */
 .nav-links {
   width: 100%;
   display: none;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .nav-links a {
   display: block;
   text-align: center;
-  padding: 10px 0;
+  padding: 12px 0;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: #0d0950;
+  color: #39ff14;
+  border: none;
+  transition: all 0.2s ease;
 }
 
 .nav-links a:hover,
 .nav-links a:focus {
-  background-color: #ff9776;
+  background-color: rgba(57, 255, 20, 0.1);
+  border-bottom: 1px solid #00ffff;
+  color: #00ffff;
 }
 
 :has(.menu[aria-expanded="true"]) .nav-links {
-  display: unset;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 1px solid #00ffff;
+  border-top: none;
+  position: absolute;
+  width: calc(100% - 2rem);
+  z-index: 100;
 }
 
 @media screen and (min-width: 636px) {
   .nav-links {
-    margin-left: 5em;
-    display: block;
-    position: static;
+    display: flex;
+    gap: 1rem;
     width: auto;
     background: none;
+    border: none;
+    margin-left: auto;
   }
 
   .nav-links a {
     display: inline-block;
-    padding: 15px 20px;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus {
+    background-color: transparent;
+    border-bottom: 2px solid #00ffff;
+  }
+
+  :has(.menu[aria-expanded="true"]) .nav-links {
+    display: flex;
+    position: static;
+    border: none;
+    background: none;
+    width: auto;
   }
 
   .menu {
     display: none;
   }
+}
+
+/* Footer */
+footer {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-top: 2px solid #00ffff;
+  color: #e0e0e0;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ffff;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #39ff14;
+}
+
+/* Button styles */
+button {
+  background-color: transparent;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+button:hover,
+button:focus {
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+button:active {
+  background-color: rgba(0, 255, 255, 0.2);
+}
+
+/* Card/Container styles */
+.card {
+  border: 1px solid #00ffff;
+  background-color: rgba(10, 14, 39, 0.8);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  background-color: rgba(10, 14, 39, 1);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 3px solid #39ff14;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #999999;
+  font-style: italic;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px dashed #00ffff;
+  margin: 2rem 0;
 }

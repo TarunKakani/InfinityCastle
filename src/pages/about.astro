@@ -1,6 +1,4 @@
 ---
-// this is the frontmatter, where u can write js code and plugin in directly to html
-// and also use this frontmatter for file info
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const pageTitle = "About Me";
@@ -19,56 +17,29 @@ const finished = false;
 const goal = 3;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
+<BaseLayout pageTitle={pageTitle}>
+    <div style="border: 2px solid #39ff14; padding: 1.5rem; margin: 2rem 0; background-color: rgba(57, 255, 20, 0.05);">
+        <h2 style="margin-top: 0;">[ PROFILE LOADED ]</h2>
+        <p style="color: #e0e0e0;">I am a digital craftsperson exploring the intersection of code and creativity through Astro and modern web technologies.</p>
+    </div>
 
-        <style>
-            .skills{
-                color: crimson;
-                font-weight: bold;
-            }
-        </style>
-        
-	</head>
-	<body>
-        <BaseLayout pageTitle={pageTitle}>
-            <h2>... and my new Astro site!</h2>
+    <h3 style="color: #00ffff; margin-top: 2rem;">[ CORE ATTRIBUTES ]</h3>
+    <ul style="color: #e0e0e0; list-style: none; padding-left: 1rem; border-left: 2px solid #00ffff;">
+        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Name:</span> {identity.firstName}</li>
+        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Location:</span> {identity.country}</li>
+        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Role:</span> {identity.occupation}</li>
+        {identity.hobbies.length >= 2 && 
+        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Hobbies:</span> {identity.hobbies[0]}, {identity.hobbies[1]}</li>
+        }
+    </ul>
 
-            <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
+    <h3 style="color: #00ffff; margin-top: 2rem;">[ SKILLS MATRIX ]</h3>
+    <ul style="list-style: none; padding: 0; margin: 1rem 0;">
+        {skills.map ((skill) => <li style="padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #39ff14; color: #39ff14; background-color: rgba(57, 255, 20, 0.05); border-radius: 3px; display: inline-block; margin-right: 0.5rem;">{skill}</li>)}
+    </ul>
 
-            <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
-
-            <p>Here are a few facts about me:</p>
-
-            <ul>
-                <li>My name is {identity.firstName}.</li>
-                <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
-
-                {identity.hobbies.length >= 2 && 
-                <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
-                }
-            </ul>
-
-            <p>My skills are:</p>
-            <ul>
-                {skills.map ((skill) => <li class="skills">{skill}</li>)}
-            </ul>
-
-
-            <!-- because of the true,false variables we can dynamically render html -->
-            <!-- {operatingSystem === "MacOS" ? <p>I am using a Mac.</p> : <p>I am not using a Mac.</p>} -->
-
-            {happy && <p>I am happy to be learning Astro!</p>}
-
-            {finished && <p>I finished this tutorial!</p>}
-
-            {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
-        </BaseLayout>
-	</body>
-</html>
+    <h3 style="color: #00ffff; margin-top: 2rem;">[ STATUS ]</h3>
+    {happy && <p style="color: #39ff14;">✓ System operational and excited to explore new frontiers.</p>}
+    {finished && <p style="color: #00ffff;">✓ Tutorial phase complete.</p>}
+    {goal === 3 ? <p style="color: #00ffff;">⟐ Objective: Complete mission in 3 cycles.</p> : <p style="color: #00ffff;">⟐ Objective tracking active.</p>}
+</BaseLayout>

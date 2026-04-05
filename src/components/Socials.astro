@@ -1,14 +1,16 @@
 ---
-// remember props?
-// you can dynamically pass values into components through props
-const { platform , username } = Astro.props
+const { platform, username } = Astro.props
 ---
 
-<a href={`https://${platform}.com/${username}`}>{platform}</a>
+<a href={`https://${platform}.com/${username}`} style="color: #39ff14; text-decoration: none; border: 1px solid #39ff14; padding: 0.5rem 1rem; border-radius: 3px; transition: all 0.2s; display: inline-block; font-weight: bold; font-size: 0.9rem;">
+    {platform}
+</a>
 
 <style>
-    a {
-        color: white;
-        text-decoration: none;
+    a:hover {
+        color: #00ffff !important;
+        border: 1px solid #00ffff !important;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
     }
 </style>

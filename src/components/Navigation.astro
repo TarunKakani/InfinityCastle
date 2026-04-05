@@ -2,10 +2,17 @@
 
 ---
 
-<!-- We can create components like react and use them reusable code in html -->
-<div id="main-menu" class="nav-links">
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blogs</a>
-    <a href="/projects/">Projects</a>
-</div>
+<nav id="main-menu" class="nav-links" style="list-style: none; padding: 0; margin: 0; display: flex; gap: 1rem;">
+    <a href="/" style="color: #39ff14; text-decoration: none; border-bottom: 2px solid transparent; padding: 0.5rem 1rem; transition: all 0.2s; text-transform: uppercase; font-size: 0.9rem; font-weight: bold;">Home</a>
+    <a href="/about/" style="color: #39ff14; text-decoration: none; border-bottom: 2px solid transparent; padding: 0.5rem 1rem; transition: all 0.2s; text-transform: uppercase; font-size: 0.9rem; font-weight: bold;">About</a>
+    <a href="/blog/" style="color: #39ff14; text-decoration: none; border-bottom: 2px solid transparent; padding: 0.5rem 1rem; transition: all 0.2s; text-transform: uppercase; font-size: 0.9rem; font-weight: bold;">Blog</a>
+    <a href="/projects/" style="color: #39ff14; text-decoration: none; border-bottom: 2px solid transparent; padding: 0.5rem 1rem; transition: all 0.2s; text-transform: uppercase; font-size: 0.9rem; font-weight: bold;">Projects</a>
+</nav>
+
+<style>
+    a:hover,
+    a:focus {
+        color: #00ffff !important;
+        border-bottom: 2px solid #00ffff !important;
+    }
+</style>

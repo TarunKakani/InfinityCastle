@@ -2,28 +2,17 @@
 import BaseLayout from "../layouts/BaseLayout.astro"
 import BlogPost from "../components/BlogPost.astro";
 
-// access all data from our posts at once through - import.meta.glob()
 const allPostsData = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
 const pageTitle = "Blogs"
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-        <BaseLayout pageTitle={pageTitle}>
-			<p>This is where I will post about my journey learning Astro.</p>
+<BaseLayout pageTitle={pageTitle}>
+<div style="border: 1px solid #00ffff; padding: 1rem; margin: 1.5rem 0; background-color: rgba(0, 255, 255, 0.03);">
+<p style="color: #999999; margin: 0;">[ ACCESSING BLOG DATABASE ]</p>
+<p style="color: #e0e0e0; margin: 0.5rem 0 0 0;">Journey through my technical chronicles and learnings.</p>
+</div>
 
-			<!-- allPostsData is generating the list of posts dynamically so we dont have to route it manually -->
-			<ul>
-				{allPostsData.map((post:any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
-			</ul>
-		</BaseLayout>
-	</body>
-</html>
+<ul style="list-style: none; padding: 0; margin: 2rem 0;">
+{allPostsData.map((post:any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+</ul>
+</BaseLayout>

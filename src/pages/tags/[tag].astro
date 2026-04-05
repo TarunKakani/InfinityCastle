@@ -1,24 +1,35 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogPost from "../../components/BlogPost.astro";
 
-// The getStaticPaths function returns an array of page routes, and 
-// all of the pages at those routes will use the same template defined in the file.
 export async function getStaticPaths() {
+    const allPostsData = Object.values(import.meta.glob('../posts/*.md', { eager : true }));
+    
     return [
-        { params : { tag: "Cyber Security" } },
-        { params : { tag: "Tools" } },
-        { params : { tag: "Networking" } },
-        { params : { tag: "Reverse Engineering" } },
-        { params : { tag: "Problem Solving" } },
-        { params : { tag: "Tryhackme" } },
-        { params : { tag: "Projects" } },
-        { params : { tag: "Coding" } },
+        { params : { tag: "Cyber Security" }, props: {posts: allPostsData}},
+        { params : { tag: "Tools" }, props: {posts: allPostsData}},
+        { params : { tag: "Networking" }, props: {posts: allPostsData}},
+        { params : { tag: "Reverse Engineering" }, props: {posts: allPostsData}},
+        { params : { tag: "Problem Solving" }, props: {posts: allPostsData}},
+        { params : { tag: "Tryhackme" }, props: {posts: allPostsData}},
+        { params : { tag: "Projects" }, props: {posts: allPostsData}},
+        { params : { tag: "Coding" }, props: {posts: allPostsData}},
     ];
 }
 
 const { tag } = Astro.params;
+const { posts } = Astro.props;
+
+const filteredPosts = posts.filter((post:any) => post.frontmatter.tags?.includes(tag));
 ---
 
 <BaseLayout pageTitle={tag}>
-    <p>Blogs tagged with {tag}</p>
+    <div style="border: 1px dashed #00ffff; padding: 1rem; margin: 1.5rem 0; background-color: rgba(0, 255, 255, 0.03);">
+        <p style="color: #999999; margin: 0;">[ TAG FILTER ACTIVE ]</p>
+        <p style="color: #e0e0e0; margin: 0.5rem 0 0 0;">Displaying {filteredPosts.length} entries matching filter criteria.</p>
+    </div>
+    
+    <ul style="list-style: none; padding: 0; margin: 2rem 0;">
+        {filteredPosts.map((post:any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+    </ul>
 </BaseLayout>
