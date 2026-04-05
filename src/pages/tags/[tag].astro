@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// The getStaticPaths function returns an array of page routes, and 
+// all of the pages at those routes will use the same template defined in the file.
+export async function getStaticPaths() {
+    return [
+        { params : { tag: "Cyber Security" } },
+        { params : { tag: "Tools" } },
+        { params : { tag: "Networking" } },
+        { params : { tag: "Reverse Engineering" } },
+        { params : { tag: "Problem Solving" } },
+        { params : { tag: "Tryhackme" } },
+        { params : { tag: "Projects" } },
+        { params : { tag: "Coding" } },
+    ];
+}
+
+const { tag } = Astro.params;
+---
+
+<BaseLayout pageTitle={tag}>
+    <p>Blogs tagged with {tag}</p>
+</BaseLayout>
