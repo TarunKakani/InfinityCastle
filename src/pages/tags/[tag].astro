@@ -2,34 +2,35 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogPost from "../../components/BlogPost.astro";
 
+// this has become seriously complicated. Need to give time on explianation
 export async function getStaticPaths() {
     const allPostsData = Object.values(import.meta.glob('../posts/*.md', { eager : true }));
     
-    return [
-        { params : { tag: "Cyber Security" }, props: {posts: allPostsData}},
-        { params : { tag: "Tools" }, props: {posts: allPostsData}},
-        { params : { tag: "Networking" }, props: {posts: allPostsData}},
-        { params : { tag: "Reverse Engineering" }, props: {posts: allPostsData}},
-        { params : { tag: "Problem Solving" }, props: {posts: allPostsData}},
-        { params : { tag: "Tryhackme" }, props: {posts: allPostsData}},
-        { params : { tag: "Projects" }, props: {posts: allPostsData}},
-        { params : { tag: "Coding" }, props: {posts: allPostsData}},
-    ];
+    // so get all tags from posts then convert to set to avoid duplicate
+    // then convert to array again (.flat())
+    // but why ... tuple unpacking and new keyword is used?
+    const uniqueTags = [...new Set(allPostsData.map((post:any) => post.frontmatter.tags).flat())];
+
+   return uniqueTags.map((tag) => {
+    const filteredPosts = allPostsData.filter((post:any) => post.frontmatter.tags.includes(tag));
+    return {
+        params: { tag },
+        props: { posts: filteredPosts },
+    }
+   })
 }
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-
-const filteredPosts = posts.filter((post:any) => post.frontmatter.tags?.includes(tag));
 ---
 
 <BaseLayout pageTitle={tag}>
     <div style="border: 1px dashed #00ffff; padding: 1rem; margin: 1.5rem 0; background-color: rgba(0, 255, 255, 0.03);">
         <p style="color: #999999; margin: 0;">[ TAG FILTER ACTIVE ]</p>
-        <p style="color: #e0e0e0; margin: 0.5rem 0 0 0;">Displaying {filteredPosts.length} entries matching filter criteria.</p>
+        <p style="color: #e0e0e0; margin: 0.5rem 0 0 0;">Displaying {posts.length} entries matching filter criteria.</p>
     </div>
     
     <ul style="list-style: none; padding: 0; margin: 2rem 0;">
-        {filteredPosts.map((post:any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+        {posts.map((post:any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
     </ul>
 </BaseLayout>

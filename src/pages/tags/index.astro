@@ -1,0 +1,18 @@
+---
+import { set } from "astro:schema";
+import BaseLayout from "../../layouts/BaseLayout.astro"
+
+const pageTitle = "Tags Page";
+
+// first we get all posts data through import.meta.glob
+const allPostsData = Object.values(import.meta.glob("../posts/*.md", {eager:true}));
+
+// now we get the tags from all the posts and turn it into a set to remove duplicates then turn it into a array
+const uniqueTags = [...new Set(allPostsData.map((post:any) => post.frontmatter.tags).flat())];
+---
+
+<BaseLayout pageTitle = {pageTitle}>
+    <div style="">
+        {uniqueTags.map((tag) => <p style=""><a href={`/tags/${tag}`}>{tag}</a></p>)}
+    </div>
+</BaseLayout>

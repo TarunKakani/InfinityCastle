@@ -1,6 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectPost from "../components/ProjectPost.astro";
+
 const pageTitle = "Projects";
+
+// how do i make project data dynamic ?
+// through a db?
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -11,6 +16,14 @@ const pageTitle = "Projects";
 
     <div style="border: 2px solid #39ff14; padding: 1.5rem; margin: 2rem 0; background-color: rgba(57, 255, 20, 0.05); text-align: center;">
         <p style="color: #39ff14; font-size: 1.1rem; margin: 0;">[ LOADING PROJECTS... ]</p>
-        <p style="color: #999999; margin: 1rem 0 0 0; font-style: italic;">Catalog expansion in progress</p>
+
+        <!-- fetch from db instead of static entries -->
+        <ProjectPost 
+            title="Service Sniffer" 
+            description="Sniff services on a LAN" 
+            tech="Python, ARP, DNS, TCP" 
+            projectLink="https://github.com/tarunKakani/Service-Sniffer"
+        />
+
     </div>
 </BaseLayout>

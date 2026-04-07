@@ -7,8 +7,18 @@ const { frontmatter } = Astro.props;
     <div class="card">
         <p><span style="color: #00ffff;">[author]</span> {frontmatter.author}</p>
         <p><span style="color: #00ffff;">[published]</span> {frontmatter.pubDate.toString().slice(0,10)}</p>
+        <p><span style="color: #00ffff;">[description]</span> {frontmatter.description}</p>
+
         <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} style="border: 1px solid #00ffff; margin: 1rem 0;" />
     </div>
+
+    <div>
+        {frontmatter.tags.map((tag:string) => (
+            // make the tags part blue neon just like heading but small
+            <p>[TAGS]<a href={`/tags/${tag}`}>{tag}</a></p>
+        ))}
+    </div>
+
     <article class="card">
         <slot />
     </article>

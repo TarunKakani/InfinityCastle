@@ -1,16 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Greetings from "../components/Greetings";
+
 const pageTitle = "Home Page";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-<div style="border: 2px solid #00ffff; padding: 2rem; margin: 2rem 0; background-color: rgba(0, 255, 255, 0.05);">
-<h2 style="color: #39ff14; margin-top: 0;">[ SYSTEM INITIATED ]</h2>
-<p style="color: #e0e0e0; line-height: 1.8;">
-Welcome to the neural hub. Explore the digital landscape through my thoughts, discoveries, and technical chronicles.
-</p>
-<p style="color: #999999; font-style: italic;">
-> Initializing cyberpunk experience...
-</p>
-</div>
+    <div style="border: 2px solid #00ffff; padding: 2rem; margin: 2rem 0; background-color: rgba(0, 255, 255, 0.05);">
+        <h2 style="color: #39ff14; margin-top: 0;">
+            [ SYSTEM INITIATED ]
+        </h2>
+        
+        <!-- The second button works because the client:load directive tells Astro to send and rerun its 
+         JavaScript on the client when the page loads, making the component interactive. 
+         This is called a hydrated component. -->
+
+        <!-- lets make this into a auto changing component -->
+        <Greetings client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+
+        <p style="color: #e0e0e0; line-height: 1.8;">
+            Welcome to the neural hub. Explore the digital landscape through my thoughts, discoveries, and technical chronicles.
+        </p>
+        <p style="color: #999999; font-style: italic;">
+            > Initializing cyberpunk experience...
+        </p>
+    </div>
 </BaseLayout>

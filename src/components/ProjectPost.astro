@@ -1,0 +1,15 @@
+---
+const { title, description, tech, projectLink} = Astro.props;
+---
+
+<!-- make the div card style -->
+<div>
+    <li style="list-style: none; margin: 1rem 0;">
+        <a href={projectLink} style="text-decoration: none; border: 1px solid #39ff14; padding: 1rem; display: block; border-radius: 3px; transition: all 0.2s; font-weight: bold;">
+            {title}
+            {description}
+            {tech}
+            {projectLink}
+        </a>
+    </li>
+</div>

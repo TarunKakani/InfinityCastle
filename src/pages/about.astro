@@ -4,17 +4,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = "About Me";
 
 const identity = {
-    firstName: "Sarah",
-    country: "Canada",
-    occupation: "Technical Writer",
-    hobbies: ["photography", "birdwatching", "baseball"],
+    firstName: "Tarun",
+    country: "Unknown",
+    occupation: "Student",
+    hobbies: ["Karting", "Bowling", "8-BallPool", "Rock Climbing"],
+    role: "Network Engineering",
+    certificates: "CCNA [YET TO PASS]",
 }
 
-const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Node Js", "Bun", "Express", "C++", "C", "Python", "Full Stack", "Networking"];
 
 const happy = true;
-const finished = false;
-const goal = 3;
+const goal = false;
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -27,10 +28,12 @@ const goal = 3;
     <ul style="color: #e0e0e0; list-style: none; padding-left: 1rem; border-left: 2px solid #00ffff;">
         <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Name:</span> {identity.firstName}</li>
         <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Location:</span> {identity.country}</li>
-        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Role:</span> {identity.occupation}</li>
+        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Occupation:</span> {identity.occupation}</li>
         {identity.hobbies.length >= 2 && 
-        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Hobbies:</span> {identity.hobbies[0]}, {identity.hobbies[1]}</li>
+        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Hobbies:</span> {identity.hobbies[0]}, {identity.hobbies[1]}, {identity.hobbies[2]}, {identity.hobbies[3]}</li>
         }
+        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Aiming For:</span> {identity.role}</li>
+        <li style="padding: 0.5rem 0;"><span style="color: #39ff14;">Certficates:</span> {identity.certificates}</li>
     </ul>
 
     <h3 style="color: #00ffff; margin-top: 2rem;">[ SKILLS MATRIX ]</h3>
@@ -40,6 +43,5 @@ const goal = 3;
 
     <h3 style="color: #00ffff; margin-top: 2rem;">[ STATUS ]</h3>
     {happy && <p style="color: #39ff14;">✓ System operational and excited to explore new frontiers.</p>}
-    {finished && <p style="color: #00ffff;">✓ Tutorial phase complete.</p>}
-    {goal === 3 ? <p style="color: #00ffff;">⟐ Objective: Complete mission in 3 cycles.</p> : <p style="color: #00ffff;">⟐ Objective tracking active.</p>}
+    {goal ? <p style="color: #00ffff;">⟐ Objective Complete: CCNA Passed!</p> : <p style="color: #00ffff;">⟐ Current Objective: CCNA Preparation.</p>}
 </BaseLayout>
